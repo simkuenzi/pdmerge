@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
     id 'net.researchgate.release' version '2.8.1'
     id "maven-publish"
     id "org.hidetake.ssh" version "2.10.1"
@@ -13,10 +12,6 @@ version version
 java {
     sourceCompatibility JavaVersion.VERSION_14
     targetCompatibility JavaVersion.VERSION_14
-}
-
-application {
-    mainClass = 'com.github.simkuenzi.foweb.Server'
 }
 
 repositories {
