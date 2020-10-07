@@ -52,7 +52,7 @@ public class Server {
         })
         .start(port)
 
-        .get("/", ctx -> {
+        .post("/", ctx -> {
             Properties properties = new Properties();
             try (InputStream in = Files.newInputStream(base.resolve("conf.properties"))) {
                 properties.load(in);
@@ -60,9 +60,7 @@ public class Server {
 
             Path resDir = Path.of(properties.getProperty("resDir"));
             Scaler scaler = new ShortEdgeScaler();
-            List<Doc> docs = ctx.queryParamMap().keySet().stream()
-                    .sorted()
-                    .map(k -> ctx.queryParamMap().get(k).get(0))
+            List<Doc> docs = ctx.body().lines()
                     .map(resDir::resolve)
                     .map(f -> f.toString().endsWith(".pdf")
                             ? new PdfFileDoc(f)
